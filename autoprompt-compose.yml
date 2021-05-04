@@ -5,6 +5,6 @@ services:
     build:
       context: .
     ports:
-      - "8091:8080"
+      - "8091:8090"
     volumes:
       - ./dist:/usr/src/dist
