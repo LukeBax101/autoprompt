@@ -61,10 +61,6 @@ module.exports = {
       excludeChunks: [ 'server' ]
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new CopyWebpackPlugin({
-      patterns: [
-      {from:'src/server/lukebaxnet-service-worker.js', to: 'lukebaxnet-service-worker.js'}
-	  ]})
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 }

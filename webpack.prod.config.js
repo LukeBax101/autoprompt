@@ -103,10 +103,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-      {from:'src/server/lukebaxnet-service-worker.js', to: 'lukebaxnet-service-worker.js'}
-	  ]}),
+    })
   ]
 }
