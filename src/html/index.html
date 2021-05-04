@@ -6,16 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutotPrompt</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/38ef5b050d.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Potta+One&family=Varela+Round&display=swap&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <header>
-        <h3>AutoPrompt</h3>
-    </header>
-    <textarea name="input" id="input" cols="30" rows="10"></textarea>
-    <button id="start">Start</button>
-    <p id="output"></p>
+    <h3 class="title">AutoPrompt</h3>
+    <p class='info'>Enter script here...</p>
+    <textarea name="input" id="input" cols="30" rows="10""></textarea>
+    <div class="middle-row">
+        <button class="start">Start Listening</button>
+        <div class="font-slider">
+            <div class="font-slider-text">Font size: </div>
+            <input type="range" min="30" max="70" id="slider" />
+        </div>
+    </div>
+    <button class="full-screen-btn"><i id="full-screen-icon" class="fas fa-expand-arrows-alt"></i></button>
+    <p id="output" class="script"></p>
 </body>
 </html>
