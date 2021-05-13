@@ -27,26 +27,34 @@ body {
     height: inherit;
     overflow-y: scroll;
     margin: 0 auto;
+    background-color: black;
+    color: white;
 }
 
 h1, p {
-font-family: sans-serif;
-text-align: center;
-padding: 20px;
+    font-family: sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 30px;
 }
 
 textarea {
     font-family: sans-serif;
+    background-color: black;
+    color: white;
+    font-size: 18px;
 }
 
 div {
-height: 100px;
-overflow: auto;
-position: absolute;
-bottom: 0px;
-right: 0;
-left: 0;
-background-color: rgba(255,255,255,0.2);
+    height: 100px;
+    overflow: auto;
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    left: 0;
 }
 
 ul {
@@ -86,14 +94,28 @@ margin: 0;
     width: 100%;
     margin-right: auto;
     justify-content: center;
+    align-items: center;
 }
 
 .start {
     height: 8vh;
+    max-height: 40px;
     margin-top: 1vh;
     margin-bottom: 1vh;
     padding: 0px 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    border: 2px solid white;
+    color: white;
+    background-color: transparent;
+    transition: all 0.2s;
+
+    &:hover {
+        color: black;
+        background-color: white;
+    }
 }
+
 
 .font-slider {
     position: relative;
@@ -115,7 +137,7 @@ margin: 0;
     left: 0;
     top: 0;
     height: 100vh !important;
-    background-color: white;
+    background-color: black;
 }
 
 .full-screen-btn {
@@ -129,7 +151,7 @@ margin: 0;
 }
 
 .matched {
-    color: rgba(255,0,0,0.4);
+    // color: rgba(255,0,0,0.8);
 }
 
 .script {

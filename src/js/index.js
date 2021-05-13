@@ -1,5 +1,5 @@
 import logMessage from './logger'
-import setupSpeech from './speech'
+import { setupSpeech, stopSpeech } from './speech'
 import '../css/style.scss'
 // Log message to console
 logMessage('Welcome to AutoPrompt!');
@@ -18,19 +18,30 @@ const output = document.querySelector('#output');
 
 let fullScreen = false;
 
+let listening = false;
+
 startButton.addEventListener('click', () => {
-  output.innerHTML = input.value.replace( /\n/g, "<br>");
-  setupSpeech();
-  startButton.innerHTML = "Reset"
+  if (listening) {
+    output.innerHTML = input.value.replace( /\n/g, "<br>");
+    stopSpeech();
+    startButton.innerHTML = "Start Listening";
+    listening = false;
+  } else {
+    setupSpeech();
+    startButton.innerHTML = "Reset / Stop"
+    listening = true;
+  }
 })
 
 input.addEventListener('input', () => {
   output.innerHTML = input.value.replace( /\n/g, "<br>");
+  stopSpeech();
+  startButton.innerHTML = "Start Listening"
+  listening = false
 })
 
 
 fontSlider.addEventListener('input', () => {
-  console.log(fontSlider.value);
   output.style.fontSize = `${fontSlider.value}px`;
 });
 
