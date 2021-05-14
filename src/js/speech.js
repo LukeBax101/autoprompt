@@ -8,6 +8,8 @@ let speechRecognitionList = null;
 
 let isRunning = false;
 let isActive = false;
+let lastStart = 0;
+let isRestarting = false;
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -35,21 +37,27 @@ function getLineHeight(element){
  }
 
 async function resetVoiceRecog() {
-    console.log('reset interval triggered');
-    if (isRunning && isActive) {
+    let now = Date.now();
+    // console.log(`Running: ${isRunning}, Active: ${isActive}, LastStart: ${lastStart}, Now: ${now},  Dif: ${now - lastStart}. Restarting: ${isRestarting}`)
+    if (isRunning && isActive && now - lastStart > 10000 && !isRestarting) {
         console.log('stopping');
+        isRestarting = true;
         recognition.stop();
         while (isRunning) {
            await sleep(50);
         }
         console.log('starting');
         recognition.start();
+        while (!isRunning) {
+            await sleep(50);
+         }
+        isRestarting = false;
     } else if (!isRunning && isActive) {
         recognition.start();
     }
 }
 
-setInterval(resetVoiceRecog, 10000);
+setInterval(resetVoiceRecog, 300);
 
 const setupSpeech = () => {
     isActive = true;
@@ -146,6 +154,7 @@ const setupSpeech = () => {
     recognition.onstart = function() { 
         console.log('on start fired')
         isRunning = true;
+        lastStart = Date.now();
     };
 
     recognition.start();

@@ -1,5 +1,6 @@
 import logMessage from './logger'
 import { setupSpeech, stopSpeech } from './speech'
+import { startStream, startRecording, stopRecording } from './video'
 import '../css/style.scss'
 // Log message to console
 logMessage('Welcome to AutoPrompt!');
@@ -10,6 +11,9 @@ if(typeof(module.hot) !== 'undefined') {
 }
 
 const startButton = document.querySelector('.start');
+const videoPanel = document.querySelector('.video');
+const videoButton = document.querySelector('.video-btn');
+const videoButtonIcon = document.querySelector('#video-icon');
 const fullScreenButton = document.querySelector('.full-screen-btn');
 const fullScreenButtonIcon = document.querySelector('#full-screen-icon');
 const fontSlider = document.querySelector('#slider');
@@ -17,18 +21,34 @@ const input = document.querySelector('#input');
 const output = document.querySelector('#output');
 
 let fullScreen = false;
+let videoOpen = true;
 
 let listening = false;
+let recording = false;
 
 startButton.addEventListener('click', () => {
   if (listening) {
     output.innerHTML = input.value.replace( /\n/g, "<br>");
     stopSpeech();
-    startButton.innerHTML = "Start Listening";
+    if (recording) {
+      stopRecording();
+      recording = false;
+    }
+    if (videoOpen) {
+      startButton.innerHTML = "Start Listening / Recording";
+    } else {
+      startButton.innerHTML = "Start Listening";
+    }
     listening = false;
   } else {
     setupSpeech();
-    startButton.innerHTML = "Reset / Stop"
+    if (videoOpen) {
+      startRecording();
+      recording = true;
+      startButton.innerHTML = "Reset / Stop / Download"
+    } else {
+      startButton.innerHTML = "Reset / Stop"
+    }
     listening = true;
   }
 })
@@ -36,7 +56,11 @@ startButton.addEventListener('click', () => {
 input.addEventListener('input', () => {
   output.innerHTML = input.value.replace( /\n/g, "<br>");
   stopSpeech();
-  startButton.innerHTML = "Start Listening"
+  if (videoOpen) {
+    startButton.innerHTML = "Start Listening / Recording"
+  } else {
+    startButton.innerHTML = "Start Listening"
+  }
   listening = false
 })
 
@@ -58,3 +82,25 @@ fullScreenButton.addEventListener('click', () => {
     fullScreenButtonIcon.classList.remove("fa-expand-arrows-alt")
   }
 })
+
+videoButton.addEventListener('click', () => {
+  if (videoOpen) {
+    videoPanel.classList.add("hide-video");
+    videoOpen = false;
+    videoButtonIcon.classList.remove("fa-video-slash")
+    videoButtonIcon.classList.add("fa-video")
+    if (!listening) {
+      startButton.innerHTML = "Start Listening";
+    }
+  } else {
+    videoPanel.classList.remove("hide-video");
+    videoOpen = true;
+    videoButtonIcon.classList.add("fa-video-slash")
+    videoButtonIcon.classList.remove("fa-video")
+    if (!listening) {
+      startButton.innerHTML = "Start Listening / Recording";
+    }
+  }
+})
+
+startStream();

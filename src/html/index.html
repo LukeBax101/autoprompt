@@ -11,18 +11,31 @@
 </head>
 
 <body>
-    <h1 class="title">AutoPrompt</h1>
-    <textarea name="input" id="input" cols="30" rows="10" placeholder="Enter script here..."></textarea>
+    <div class="title-row">
+        <div class="scroll-icon"></div>
+        <h1 class="title">AutoPrompt</h1>
+    </div>
+    <div class="top-row">
+        <textarea name="input" id="input" placeholder="Enter script here..."></textarea>
+        <div class="video">
+            <video autoplay muted></video>
+            <button class="video-btn">
+                <i id="video-icon" class="fas fa-video-slash"></i>
+            </button>
+        </div>
+    </div>
     <div class="middle-row">
         <button class="start">
-            Start Listening
+            Start Listening / Recording
         </button>
         <div class="font-slider">
             <div class="font-slider-text">Font size: </div>
             <input type="range" min="30" max="70" id="slider" />
         </div>
     </div>
-    <button class="full-screen-btn"><i id="full-screen-icon" class="fas fa-expand-arrows-alt"></i></button>
-    <p id="output" class="script"></p>
+    <button class="full-screen-btn">
+        <i id="full-screen-icon" class="fas fa-expand-arrows-alt"></i>
+    </button>
+    <p id="output"></p>
 </body>
 </html>
